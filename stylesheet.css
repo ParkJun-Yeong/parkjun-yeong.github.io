@@ -1,0 +1,258 @@
+/* Adapted from Jon Barron's website (github.com/jonbarron/website) */
+
+:root {
+  --bg: #fafafc;
+  --text: #1d2029;
+  --muted: #5e6472;
+  --rule: #e3e5ec;
+  --link: #4c2a9e;
+  --link-hover: #b8327a;
+  --highlight: #fff4d1;
+  --glow-a: #f4d03f;
+  --glow-b: #e8743b;
+  --glow-c: #b8327a;
+  --glow-d: #5b2a9e;
+  --photo-bg: #ece8f6;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171e;
+    --text: #e7e8ee;
+    --muted: #9ba1ae;
+    --rule: #2a2e39;
+    --link: #b9a6ff;
+    --link-hover: #ff93c3;
+    --highlight: #2c2716;
+    --photo-bg: #262236;
+    color-scheme: dark;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.6;
+}
+
+.page {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 56px 24px 40px;
+}
+
+a {
+  color: var(--link);
+  text-decoration: none;
+  transition: color .15s ease;
+}
+a:hover { color: var(--link-hover); }
+a:focus-visible {
+  outline: 2px solid var(--link);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+p { margin: 0 0 12px; }
+
+/* Intro */
+.intro {
+  display: grid;
+  grid-template-columns: 1fr 210px;
+  gap: 40px;
+  align-items: center;
+  margin-bottom: 40px;
+}
+
+.name {
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-weight: 500;
+  font-size: 46px;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 18px;
+}
+
+.intro-text p { max-width: 62ch; }
+
+.links { margin-top: 16px; }
+.links span { color: var(--muted); margin: 0 6px; }
+
+/* Portrait with a gaze-heatmap glow behind it */
+.portrait {
+  position: relative;
+  width: 210px;
+  height: 210px;
+}
+
+.glow {
+  position: absolute;
+  inset: -34px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 58% 42%, var(--glow-a) 0%, transparent 34%),
+    radial-gradient(circle at 50% 50%, var(--glow-b) 0%, transparent 52%),
+    radial-gradient(circle at 46% 56%, var(--glow-c) 0%, transparent 64%),
+    radial-gradient(circle at 50% 50%, var(--glow-d) 0%, transparent 72%);
+  filter: blur(14px);
+  opacity: .7;
+  animation: glow-in 1.6s ease-out both;
+}
+
+@keyframes glow-in {
+  from { opacity: 0; transform: scale(.82); }
+  to   { opacity: .7; transform: scale(1); }
+}
+
+.photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--photo-bg);
+  display: grid;
+  place-items: center;
+}
+
+.photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.initials {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 64px;
+  color: var(--link);
+}
+
+/* Sections */
+section { margin-top: 44px; }
+
+h2 {
+  font-family: 'Newsreader', Georgia, 'Times New Roman', serif;
+  font-weight: 500;
+  font-size: 26px;
+  margin: 0 0 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--rule);
+}
+
+.note { color: var(--muted); font-size: 14px; }
+
+.muted { color: var(--muted); }
+
+.item-title { font-weight: 600; }
+
+span.highlight {
+  background: var(--highlight);
+  padding: 0 4px;
+  border-radius: 3px;
+}
+
+/* News */
+ul.dated, ul.plain, ul.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.dated li {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+  padding: 4px 0;
+}
+
+.date, .when, .year {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+  font-size: 14px;
+}
+
+/* Publications */
+.pub {
+  display: grid;
+  grid-template-columns: 96px 1fr;
+  gap: 16px;
+  padding: 14px 16px;
+  margin: 0 -16px 6px;
+  border-radius: 10px;
+}
+
+.pub.is-highlight { background: var(--highlight); }
+
+.pub p { margin: 0 0 2px; }
+
+.pub-title {
+  font-family: 'Newsreader', Georgia, serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.35;
+  margin-bottom: 4px !important;
+}
+
+.pub-authors, .pub-venue { font-size: 14.5px; }
+
+.pub-award {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--link-hover);
+  margin-top: 4px !important;
+}
+
+/* Patents, awards */
+ul.plain li { padding: 6px 0; }
+
+/* Experience, education */
+ul.timeline li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 24px;
+  padding: 8px 0;
+}
+
+.when { white-space: nowrap; padding-top: 2px; }
+
+footer {
+  margin-top: 56px;
+  text-align: right;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* Mobile */
+@media (max-width: 640px) {
+  .page { padding: 36px 20px 32px; }
+  .intro {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .portrait {
+    order: -1;
+    width: 150px;
+    height: 150px;
+    margin: 8px auto 0;
+  }
+  .name { font-size: 38px; text-align: center; }
+  .links { text-align: center; }
+  ul.dated li { grid-template-columns: 1fr; gap: 2px; }
+  .pub { grid-template-columns: 1fr; gap: 2px; margin: 0 -12px 6px; padding: 12px; }
+  ul.timeline li { grid-template-columns: 1fr; gap: 2px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow { animation: none; }
+  a { transition: none; }
+}
