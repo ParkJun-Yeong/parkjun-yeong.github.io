@@ -212,6 +212,14 @@ ul.dated li {
   margin-top: 4px !important;
 }
 
+.pub-links { font-size: 14px; }
+.pub-desc {
+  color: var(--muted);
+  font-size: 14.5px;
+  margin-top: 6px !important;
+  max-width: 64ch;
+}
+
 /* Patents, awards */
 ul.plain li { padding: 6px 0; }
 
